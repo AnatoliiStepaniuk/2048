@@ -1,5 +1,7 @@
 package com.twenty48;
 
+import javax.servlet.http.HttpSession;
+
 public class Game {
 
     private GameState gameState;

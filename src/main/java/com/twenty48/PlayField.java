@@ -1,5 +1,6 @@
 package com.twenty48;
 
+import javax.servlet.http.HttpSession;
 import java.util.Random;
 
 public class PlayField {
@@ -24,6 +25,13 @@ public class PlayField {
     }
 
     public void oneTurn(Direction dir){
+
+        // if session contains currentField
+        // read currentField from it
+        // else if session does not contain currentField
+        // write empty currentField in it
+
+
         saveCurrentField();
         paths = PathCreator.getPaths(dir, currentField);
         wasActionInTurn = false; // presumption
