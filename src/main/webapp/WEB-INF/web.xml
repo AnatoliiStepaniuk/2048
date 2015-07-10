@@ -12,18 +12,8 @@
     </context-param>
 
     <servlet>
-        <servlet-name>HelloServlet</servlet-name>
-        <servlet-class>com.mywebapp.hello.HelloServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>HelloServlet</servlet-name>
-        <url-pattern>/hello</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>GETPOST</servlet-name>
-        <servlet-class>com.mywebapp.getpost.GETPOSTServlet</servlet-class>
+        <servlet-name>StartServlet</servlet-name>
+        <servlet-class>com.twenty48.StartServlet</servlet-class>
         <init-param>
             <param-name>technology</param-name>
             <param-value>servlets</param-value>
@@ -31,40 +21,9 @@
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>GETPOST</servlet-name>
-        <url-pattern>/getpost</url-pattern>
+        <servlet-name>StartServlet</servlet-name>
+        <url-pattern>/start</url-pattern>
     </servlet-mapping>
-
-    <servlet>
-        <servlet-name>Source</servlet-name>
-        <servlet-class>com.mywebapp.communication.Source</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>Source</servlet-name>
-        <url-pattern>/source</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>Destination</servlet-name>
-        <servlet-class>com.mywebapp.communication.Destination</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>Destination</servlet-name>
-        <url-pattern>/destination</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>TimeServlet</servlet-name>
-        <servlet-class>com.mywebapp.communication.TimeServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>TimeServlet</servlet-name>
-        <url-pattern>/time</url-pattern>
-    </servlet-mapping>
-
 
 </web-app>
 

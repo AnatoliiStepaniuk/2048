@@ -1,4 +1,4 @@
-package com.mywebapp.getpost;
+package com.twenty48;
 
 import java.util.Random;
 

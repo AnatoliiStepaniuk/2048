@@ -1,4 +1,4 @@
-package com.mywebapp.getpost;
+package com.twenty48;
 
 public enum GameState {
     Game,
