@@ -15,7 +15,6 @@ public class Game {
         Direction dir = Direction.NO;
         switch (code){
             case 0:
-                dir = Direction.NO;
                 return playField.getCurrentField();
             case 1:
                 dir = Direction.UP;
@@ -56,7 +55,6 @@ public class Game {
 
         gameState = getGameState();
         return playField.getCurrentField();
-//        System.out.println(playField.getCurrentField());
     }
 
     private GameState getGameState(){

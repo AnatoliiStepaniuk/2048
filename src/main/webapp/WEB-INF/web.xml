@@ -5,12 +5,6 @@
          version="2.5">
 
 
-    <display-name>Servlets Tutorial</display-name>
-    <context-param>
-        <param-name>greet</param-name>
-        <param-value>Hello</param-value>
-    </context-param>
-
     <servlet>
         <servlet-name>StartServlet</servlet-name>
         <servlet-class>com.twenty48.StartServlet</servlet-class>

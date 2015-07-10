@@ -7,6 +7,8 @@
  </head>
  <body>
 Нажмите на клавиатуре стрелочки вверх, вправо, вниз, влево
+<br>
+Esc - для новой игры
 
 <h1 id="mes" style="font-size: 100px; text-align: center;"></h1>
 
@@ -15,7 +17,10 @@ jQuery(document).on('keydown',function(event){
 
 	
 	var direction = 0;
-	if(event.keyCode == 38){
+	if(event.keyCode == 27){
+		direction = 0;
+	}
+	else if(event.keyCode == 38){
 		direction = 1;
 	}
 	else if(event.keyCode == 39){
@@ -28,22 +33,35 @@ jQuery(document).on('keydown',function(event){
 		direction = 4;
 	}
 
+	if(direction >= 0 && direction <= 4){
+		$.ajax({
+		  method  : "POST",
+		  url     : "/2048/start",
+		  data    : {
+			direction: direction
+		  },
+		  success : function(answer){
+			jQuery("#mes").html(answer);
+		  }
+		});
+	}
+});
+
+
+$(document).ready( function(event){
+  var direction = 0;
 	$.ajax({
-	  
 	  method  : "POST",
 	  url     : "/2048/start",
-	  data    : { 
-	  	direction: direction 
+	  data    : {
+	  	direction: direction
 	  },
 	  success : function(answer){
 	  	jQuery("#mes").html(answer);
 	  }
 
 	});
-
 });
-
-
 
 </script>
  </body> 
