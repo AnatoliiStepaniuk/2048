@@ -2,14 +2,13 @@ package com.twenty48;
 
 public class Tile {
     private int value;
+    int x, y, prevX, prevY;
     private boolean merged;
 
-    public Tile() {
-        value = 0;
-        merged = false;
-    }
-    public Tile(int value) {
+    public Tile(int y, int x, int value) {
         this.value = value;
+        this.y = y;
+        this.x = x;
         merged = false;
     }
 
@@ -21,15 +20,43 @@ public class Tile {
         this.value = value;
     }
 
-    public boolean isMerged(){
+    public boolean getMerged(){
         return merged;
     }
 
-    public void setUnmerged(){
-        merged = false;
+    public void setMerged(boolean merged){
+        this.merged = merged;
     }
 
-    public void setMerged(){
-        merged = true;
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public int getPrevX() {
+        return prevX;
+    }
+
+    public void setPrevX(int prevX) {
+        this.prevX = prevX;
+    }
+
+    public int getPrevY() {
+        return prevY;
+    }
+
+    public void setPrevY(int prevY) {
+        this.prevY = prevY;
     }
 }

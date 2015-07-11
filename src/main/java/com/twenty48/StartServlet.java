@@ -38,14 +38,38 @@ public class StartServlet extends HttpServlet  {
             game = new Game(GameState.Game); // start new game
         String answer = game.run(direction);
         String[] lines = answer.split("\n");
-
+        StringBuilder sb = new StringBuilder();
 
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
-        for(String s : lines){
-            out.println(s);
-            out.println("<br>");
+        sb.append("{\"board\":[");
+            for(int j = 0; j < lines.length; j++){
+            String[] temp = lines[j].split(" ");
+            sb.append("[");
+            for(int i = 0; i < temp.length; i++){
+                sb.append(temp[i]);
+                if(i != temp.length-1)
+                    sb.append(",");
+            }
+            sb.append("]");
+            if(j != lines.length-1)
+                sb.append(",");
         }
+
+        sb.append("]");
+        sb.append("}");
+        out.println(sb.toString());
+/*
+    output in format:
+{
+  "board":[
+    [0,2,4,4],
+    [0,0,0,0],
+    [0,0,0,0],
+    [0,0,0,0]
+  ]
+}
+*/
 
         out.close();
     }

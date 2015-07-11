@@ -1,16 +1,100 @@
 <!DOCTYPE html>
 <html>
  <head>
-   <title>!DOCTYPE</title>
+   <title>2048</title>
    <meta charset="utf-8">
    <script type="text/javascript" src="jquery-1.11.3.min.js"></script>
+   <link href="style/main.css" rel="stylesheet" type="text/css">
+	 <link rel="shortcut icon" href="favicon.ico">
+	 <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0, maximum-scale=1, user-scalable=no, minimal-ui">
+
  </head>
  <body>
 Нажмите на клавиатуре стрелочки вверх, вправо, вниз, влево
 <br>
 Esc - для новой игры
 
-<h1 id="mes" style="font-size: 100px; text-align: center;"></h1>
+<h1 id="mes" style="font-size: 50px; text-align: center;"></h1>
+
+<div class="container">
+	<div class="heading">
+		<h1 class="title">2048</h1>
+		<div class="scores-container">
+			<div class="score-container">0</div>
+			<div class="best-container">0</div>
+		</div>
+	</div>
+
+	<div class="above-game">
+		<p class="game-intro">Join the numbers and get to the <strong>2048 tile!</strong></p>
+		<a class="restart-button">New Game</a>
+	</div>
+
+	<div class="game-container">
+		<div class="game-message">
+			<p></p>
+			<div class="lower">
+				<a class="keep-playing-button">Keep going</a>
+				<a class="retry-button">Try again</a>
+			</div>
+		</div>
+
+		<div class="grid-container">
+			<div class="grid-row">
+				<div class="grid-cell"></div>
+				<div class="grid-cell"></div>
+				<div class="grid-cell"></div>
+				<div class="grid-cell"></div>
+			</div>
+			<div class="grid-row">
+				<div class="grid-cell"></div>
+				<div class="grid-cell"></div>
+				<div class="grid-cell"></div>
+				<div class="grid-cell"></div>
+			</div>
+			<div class="grid-row">
+				<div class="grid-cell"></div>
+				<div class="grid-cell"></div>
+				<div class="grid-cell"></div>
+				<div class="grid-cell"></div>
+			</div>
+			<div class="grid-row">
+				<div class="grid-cell"></div>
+				<div class="grid-cell"></div>
+				<div class="grid-cell"></div>
+				<div class="grid-cell"></div>
+			</div>
+		</div>
+
+		<div class="tile-container">
+
+		</div>
+	</div>
+
+	<p class="game-explanation">
+		<strong class="important">How to play:</strong> Use your <strong>arrow keys</strong> to move the tiles. When two tiles with the same number touch, they <strong>merge into one!</strong>
+	</p>
+	<hr>
+	<p>
+		<strong class="important">Note:</strong> This site is the official version of 2048. You can play it on your phone via <a href="http://git.io/2048">http://git.io/2048.</a> All other apps or sites are derivatives or fakes, and should be used with caution.
+	</p>
+	<hr>
+	<p>
+		Created by <a href="http://gabrielecirulli.com" target="_blank">Gabriele Cirulli.</a> Based on <a href="https://itunes.apple.com/us/app/1024!/id823499224" target="_blank">1024 by Veewo Studio</a> and conceptually similar to <a href="http://asherv.com/threes/" target="_blank">Threes by Asher Vollmer.</a>
+	</p>
+</div>
+
+<!--<script src="js/bind_polyfill.js"></script>
+<script src="js/classlist_polyfill.js"></script>
+<script src="js/animframe_polyfill.js"></script>
+<script src="js/keyboard_input_manager.js"></script>
+<script src="js/html_actuator.js"></script>
+<script src="js/grid.js"></script>
+<script src="js/tile.js"></script>
+<script src="js/local_storage_manager.js"></script>
+<script src="js/game_manager.js"></script>
+<script src="js/application.js"></script>-->
+
 
 <script type="text/javascript">
 jQuery(document).on('keydown',function(event){
@@ -41,11 +125,92 @@ jQuery(document).on('keydown',function(event){
 			direction: direction
 		  },
 		  success : function(answer){
-			jQuery("#mes").html(answer);
+		  	  	jQuery("#mes").html(answer);
+		  	<!--var tileContainer    = document.querySelector(".tile-container");-->
+			<!--tileContainer.innerHTML = "";-->
+			<!--parseAnswer(answer);-->
 		  }
 		});
 	}
 });
+
+
+function parseAnswer(str){
+var answer = JSON.parse(str);
+var board_mass = answer.board;
+
+for(var y=0; y<board_mass.length; y++){
+	for(var x=0; x<board_mass.length; x++){
+			var tile = {"x":x,
+						"y":y,
+						"value":board_mass[y][x],
+	  					"previousPosition" : null,
+	  					"mergedFrom"       : null
+					   };
+
+			addTile(tile);
+	}
+}
+}
+
+
+function positionClassF(position) {
+  position = normalizePosition(position);
+  return "tile-position-" + position.x + "-" + position.y;
+};
+
+function normalizePosition(position) {
+  return { x: position.x + 1, y: position.y + 1 };
+};
+
+function applyClasses(element, classes) {
+  element.setAttribute("class", classes.join(" "));
+};
+
+
+function addTile(tile){
+  var wrapper   = document.createElement("div");
+  var inner     = document.createElement("div");
+  var position  = tile.previousPosition || { x: tile.x, y: tile.y };
+  var positionClass = positionClassF(position);
+
+
+  var classes = ["tile", "tile-" + tile.value, positionClass];
+
+  if (tile.value > 2048) classes.push("tile-super");
+
+  applyClasses(wrapper, classes);
+
+  inner.classList.add("tile-inner");
+  inner.textContent = tile.value;
+
+  if (tile.previousPosition) {
+    // Make sure that the tile gets rendered in the previous position first
+    window.requestAnimationFrame(function () {
+      classes[2] = self.positionClass({ x: tile.x, y: tile.y });
+      self.applyClasses(wrapper, classes); // Update the position
+    });
+  } else if (tile.mergedFrom) {
+    classes.push("tile-merged");
+    this.applyClasses(wrapper, classes);
+
+    // Render the tiles that merged
+    tile.mergedFrom.forEach(function (merged) {
+      self.addTile(merged);
+    });
+  } else {
+    classes.push("tile-new");
+    applyClasses(wrapper, classes);
+  }
+
+  // Add the inner part of the tile to the wrapper
+  wrapper.appendChild(inner);
+  // Put the tile on the board
+  var tileContainer = document.querySelector(".tile-container");
+  tileContainer.appendChild(wrapper);
+};
+
+
 
 
 $(document).ready( function(event){
@@ -58,6 +223,7 @@ $(document).ready( function(event){
 	  },
 	  success : function(answer){
 	  	jQuery("#mes").html(answer);
+	  	<!--parseAnswer(answer);-->
 	  }
 
 	});

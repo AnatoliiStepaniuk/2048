@@ -1,7 +1,5 @@
 package com.twenty48;
 
-import javax.servlet.http.HttpSession;
-
 public class Game {
 
     private GameState gameState;
@@ -11,6 +9,15 @@ public class Game {
         this.gameState = gameState;
         playField = new PlayField();
     }
+
+
+/*
+    public static void main(String[] args) {
+
+        run(4);
+    }
+*/
+
 
     public String run(int code){
 
@@ -63,9 +70,11 @@ public class Game {
 
         if (!playField.actionIsPossible())
             return GameState.GameOver;
+/*
         else
            if (playField.getMaxValue() == 2048)
              return GameState.Twenty48;
+*/
             else
                return GameState.Game;
 
