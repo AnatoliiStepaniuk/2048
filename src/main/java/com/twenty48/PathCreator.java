@@ -2,12 +2,12 @@ package com.twenty48;
 
 public class PathCreator {
 
-    public static Path[] getPaths(Direction dir, Tile[][] tiles){
+    public static Path[] getPaths(Tile[][] tiles){
 
             Path[] paths = new Path[4];
             Tile[] temp = new Tile[4];
-            switch (dir){
-                case UP:
+            switch (Direction.direction){
+                case "UP":
                     for(int j = 0; j < PlayField.getSize(); j++) {
                         for (int i = 0; i < PlayField.getSize(); i++) {
                             temp[i] = tiles[i][j];
@@ -15,7 +15,7 @@ public class PathCreator {
                         paths[j] = new Path(temp);
                     }
                     break;
-                case RIGHT:
+                case "RIGHT":
                     for(int j = 0; j < PlayField.getSize(); j++) {
                         for (int i = 0; i < PlayField.getSize(); i++) {
                             temp[i] = tiles[j][PlayField.getSize()-1 - i];
@@ -23,7 +23,7 @@ public class PathCreator {
                         paths[j] = new Path(temp);
                     }
                     break;
-                case DOWN:
+                case "DOWN":
                     for(int j = 0; j < PlayField.getSize(); j++) {
                         for (int i = 0; i < PlayField.getSize(); i++) {
                             temp[i] = tiles[PlayField.getSize()-1-i][j];
@@ -31,7 +31,7 @@ public class PathCreator {
                         paths[j] = new Path(temp);
                     }
                     break;
-                case LEFT:
+                case "LEFT":
                     for(int j = 0; j < PlayField.getSize(); j++) {
                         for (int i = 0; i < PlayField.getSize(); i++) {
                             temp[i] = tiles[j][i];

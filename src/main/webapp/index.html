@@ -125,10 +125,10 @@ jQuery(document).on('keydown',function(event){
 			direction: direction
 		  },
 		  success : function(answer){
-		  	  	jQuery("#mes").html(answer);
-		  	<!--var tileContainer    = document.querySelector(".tile-container");-->
-			<!--tileContainer.innerHTML = "";-->
-			<!--parseAnswer(answer);-->
+		  	  	<!--jQuery("#mes").html(answer);-->
+		  	var tileContainer    = document.querySelector(".tile-container");
+			tileContainer.innerHTML = "";
+			parseAnswer(answer);
 		  }
 		});
 	}
@@ -222,8 +222,8 @@ $(document).ready( function(event){
 	  	direction: direction
 	  },
 	  success : function(answer){
-	  	jQuery("#mes").html(answer);
-	  	<!--parseAnswer(answer);-->
+	  	<!--jQuery("#mes").html(answer);-->
+	  	parseAnswer(answer);
 	  }
 
 	});

@@ -2,7 +2,7 @@ package com.twenty48;
 
 public class Tile {
     private int value;
-    int x, y, prevX, prevY;
+    private int x, y, prevX, prevY;
     private boolean merged;
 
     public Tile(int y, int x, int value) {
@@ -10,6 +10,15 @@ public class Tile {
         this.y = y;
         this.x = x;
         merged = false;
+    }
+
+    public Tile(Tile tile) {
+        this.value = tile.value;
+        this.x = tile.y;
+        this.y = tile.y;
+        this.prevX = tile.prevX;
+        this.prevY = tile.prevY;
+        this.merged = tile.merged;
     }
 
     public int getValue(){

@@ -1,9 +1,7 @@
 package com.twenty48;
 
-public enum Direction {
-    UP,
-    DOWN,
-    RIGHT,
-    LEFT,
-    NO
+public class Direction {
+
+    public static String direction;
+    public static int dX, dY;
 }

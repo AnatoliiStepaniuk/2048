@@ -13,29 +13,42 @@ public class Game {
 
 /*
     public static void main(String[] args) {
-
-        run(4);
+        Game game = new Game(GameState.Game);
+        System.out.println(game.run(2));
+        System.out.println(game.run(1));
+        System.out.println(game.run(1));
+        System.out.println(game.run(1));
     }
 */
 
 
     public String run(int code){
 
-        Direction dir = Direction.NO;
+        Direction.direction = "NO";
+        Direction.dX = 0;
+        Direction.dY = 0;
         switch (code){
             case 0:
-                return playField.getCurrentField();
+                return playField.getTiles();
             case 1:
-                dir = Direction.UP;
+                Direction.direction = "UP";
+                Direction.dX = 0;
+                Direction.dY = -1;
                 break;
             case 2:
-                dir = Direction.RIGHT;
+                Direction.direction = "RIGHT";
+                Direction.dX = 1;
+                Direction.dY = 0;
                 break;
             case 3:
-                dir = Direction.DOWN;
+                Direction.direction = "DOWN";
+                Direction.dX = 0;
+                Direction.dY = 1;
                 break;
             case 4:
-                dir = Direction.LEFT;
+                Direction.direction = "LEFT";
+                Direction.dX = -1;
+                Direction.dY = 0;
                 break;
             default:
                 ///
@@ -45,7 +58,7 @@ public class Game {
 
         switch (gameState){
             case Game:
-                playField.oneTurn(dir);
+                playField.oneTurn();
                 break;
             case GameOver:
                 ///
@@ -63,7 +76,7 @@ public class Game {
         }
 
         gameState = getGameState();
-        return playField.getCurrentField();
+        return playField.getTiles();
     }
 
     private GameState getGameState(){

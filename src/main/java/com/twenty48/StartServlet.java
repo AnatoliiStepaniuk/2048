@@ -37,11 +37,13 @@ public class StartServlet extends HttpServlet  {
         if(direction == 0)
             game = new Game(GameState.Game); // start new game
         String answer = game.run(direction);
-        String[] lines = answer.split("\n");
-        StringBuilder sb = new StringBuilder();
 
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
+        String[] lines = answer.split("\n");
+        StringBuilder sb = new StringBuilder();
+/*
+
         sb.append("{\"board\":[");
             for(int j = 0; j < lines.length; j++){
             String[] temp = lines[j].split(" ");
@@ -58,9 +60,71 @@ public class StartServlet extends HttpServlet  {
 
         sb.append("]");
         sb.append("}");
+
         out.println(sb.toString());
+*/
+
+        sb.append("{\"tiles\":[");
+        for(int j = 0; j < lines.length; j++){
+            String [] tileObject = lines[j].split(" ");
+            sb.append("{");
+
+                sb.append("\"value\":" + tileObject[0] + ",");
+                sb.append("\"x\":" + tileObject[1] + ",");
+                sb.append("\"y\":" + tileObject[2] + ",");
+                sb.append("\"prevX\":" + tileObject[3] + ",");
+                sb.append("\"prevY\":" + tileObject[4] + ",");
+                sb.append("\"merged\":" + tileObject[5]);
+
+            sb.append("}");
+            if(j != lines.length-1)
+                sb.append(",");
+        }
+
+
+        out.println(answer);
 /*
+{
+  "tiles":[
+    {
+            "value":"4",
+            "x": "0",
+            "y": "1",
+            "prevX": "1",
+            "prevY": "1",
+            "merged": "true"
+    },
+    {
+            "value":"4",
+            "x": "0",
+            "y": "1",
+            "prevX": "1",
+            "prevY": "1",
+            "merged": "true"
+    },
+    {
+            "value":"4",
+            "x": "0",
+            "y": "1",
+            "prevX": "1",
+            "prevY": "1",
+            "merged": "true"
+    },
+    {
+            "value":"4",
+            "x": "0",
+            "y": "1",
+            "prevX": "1",
+            "prevY": "1",
+            "merged": "true"
+    }
+  ]
+}
+
+
+
     output in format:
+
 {
   "board":[
     [0,2,4,4],
@@ -69,6 +133,9 @@ public class StartServlet extends HttpServlet  {
     [0,0,0,0]
   ]
 }
+
+
+
 */
 
         out.close();

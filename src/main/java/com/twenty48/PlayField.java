@@ -14,18 +14,19 @@ public class PlayField {
     public PlayField(){
         currentField = new Tile[size][size];
 //        oldField = new Tile[size][size];
-//        for(int j = 0; j < size; j++)
-//            for (int i = 0; i < size; i++) {
-//                currentField[j][i] = new Tile();
-//                oldField[j][i] = new Tile();
-//        }
-        spawn();
+
+        for(int j = 0; j < size; j++)
+            for (int i = 0; i < size; i++) {
+                currentField[j][i] = new Tile(j, i, 0);
+        }
+
+//        spawn();
         spawn();
     }
 
-    public void oneTurn(Direction dir){
+    public void oneTurn(){
         saveOldPositions();
-        paths = PathCreator.getPaths(dir, currentField);
+        paths = PathCreator.getPaths(currentField);
         wasActionInTurn = false; // presumption
 
         do { // move or merge tiles while there's still some action
@@ -36,14 +37,14 @@ public class PlayField {
             }
         } while(wasActionInLoop);
 
-        if(wasActionInTurn)
-            spawn();
+//        if(wasActionInTurn)
+//            spawn();
     }
 
     private void saveOldPositions(){
         for(int j = 0; j < PlayField.getSize(); j++){
             for(int i = 0; i < PlayField.getSize(); i++){
-                if(currentField[j][i] != null){
+                if(currentField[j][i].getValue() != 0){
                     currentField[j][i].setMerged(false);
                     currentField[j][i].setPrevX(currentField[j][i].getX());
                     currentField[j][i].setPrevY(currentField[j][i].getY());
@@ -62,11 +63,16 @@ public class PlayField {
         do{
             x = r.nextInt(4);
             y = r.nextInt(4);
-        } while(currentField[y][x] != null);
+        } while(currentField[y][x].getValue() != 0);
 
         //put 2 or 4 there
-        value = (r.nextInt(10) == 0 ? 4 : 2);
-        currentField[y][x] = new Tile(y, x, value);
+
+//        value = (r.nextInt(10) == 0 ? 4 : 2);
+//        currentField[y][x] = new Tile(y, x, value);
+            currentField[0][0] = new Tile(0, 0, 16);
+            currentField[1][0] = new Tile(1, 0, 8);
+            currentField[2][0] = new Tile(2, 0, 4);
+            currentField[3][0] = new Tile(3, 0, 4);
 
 
     }
@@ -74,7 +80,7 @@ public class PlayField {
 
         for(int j = 0; j < PlayField.getSize(); j++) {
             for (int i = 0; i < PlayField.getSize(); i++) {
-                if (currentField[j][i] == null)
+                if (currentField[j][i].getValue() == 0)
                     return true;
 
                 else if(i != 0 && currentField[j][i-1] != null && currentField[j][i].getValue() == currentField[j][i-1].getValue() ||
@@ -104,20 +110,28 @@ public class PlayField {
         return size;
     }
 
-    public String getCurrentField(){
+    public String getTiles(){
         StringBuilder sb = new StringBuilder();
 
         for(int j = 0; j < PlayField.getSize(); j++){
             for(int i = 0; i < PlayField.getSize(); i++){
-                if(currentField[j][i] == null)
-                    sb.append("0");
-                else
+                if(currentField[j][i].getValue() != 0) {
                     sb.append(currentField[j][i].getValue());
-                if (i != PlayField.getSize()-1)
                     sb.append(" ");
+                    sb.append(currentField[j][i].getX());
+                    sb.append(" ");
+                    sb.append(currentField[j][i].getY());
+                    sb.append(" ");
+                    sb.append(currentField[j][i].getPrevX());
+                    sb.append(" ");
+                    sb.append(currentField[j][i].getY());
+                    sb.append(" ");
+                    sb.append(currentField[j][i].getMerged());
+                    sb.append("\n");
+                }
             }
-            sb.append("\n");
         }
+
         return sb.toString();
     }
 
