@@ -7,14 +7,12 @@ public class PlayField {
 
     private static int size = 4;
     private Tile[][] currentField;
-//    private Tile[][] oldField;
     private Path[] paths;
     private boolean wasActionInLoop;
     private boolean wasActionInTurn;
 
     public PlayField(){
         currentField = new Tile[size][size];
-//        oldField = new Tile[size][size];
 
         for(int j = 0; j < size; j++)
             for (int i = 0; i < size; i++) {
@@ -55,31 +53,24 @@ public class PlayField {
     }
 
     public void spawn(){
-        int x, y, value;
+        int value;
         Random r = new Random();
 
-        // randomly find emptyslot
-        do{
-            x = r.nextInt(4);
-            y = r.nextInt(4);
-        } while(currentField[y][x].getValue() != 0);
+        // make an arrayList of 0-tiles
+        ArrayList<Tile> freeTiles = new ArrayList<>();
+        for(int j = 0; j < PlayField.getSize(); j++){
+            for(int i = 0; i < PlayField.getSize(); i++){
+                if(currentField[j][i].getValue() == 0)
+                    freeTiles.add(currentField[j][i]);
+            }
+        }
 
-        //put 2 or 4 there
+        // put 2 or 4 into on the random position in arrayList
+        int position = r.nextInt(freeTiles.size());
         value = (r.nextInt(10) == 0 ? 4 : 2);
-//        currentField[y][x] = new Tile(y, x, value);
-
-        currentField[y][x].setValue(value);
-        currentField[y][x].setX(x);
-        currentField[y][x].setY(y);
-        currentField[y][x].setPrevX(x);
-        currentField[y][x].setPrevY(y);
-        currentField[y][x].setMerged(false);
-
-//            currentField[0][0] = new Tile(0, 0, 16);
-//            currentField[1][0] = new Tile(1, 0, 8);
-//            currentField[2][0] = new Tile(2, 0, 4);
-//            currentField[3][0] = new Tile(3, 0, 4);
-
+        freeTiles.get(position).setValue(value);
+        freeTiles.get(position).setPrevX(freeTiles.get(position).getPrevX());
+        freeTiles.get(position).setPrevY(freeTiles.get(position).getPrevY());
 
     }
     public boolean actionIsPossible(){

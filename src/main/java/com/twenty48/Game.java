@@ -10,14 +10,13 @@ public class Game {
         playField = new PlayField();
     }
 
-
+/*
     public static void main(String[] args) {
         Game game = new Game(GameState.Game);
         System.out.println(game.run(2));
-        System.out.println(game.run(1));
-        System.out.println(game.run(4));
-        System.out.println(game.run(3));
+
     }
+*/
 
 
     public String run(int code){
