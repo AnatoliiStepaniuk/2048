@@ -141,11 +141,12 @@ function parseAnswer(str){
 
 	for(var t=0; t<tileArray.length; t++){
 
-			var tile = {"x":tileArray[t].x,
-						"y":tileArray[t].y,
-						"value":tileArray[t].value,
-	  					"previousPosition" : null,
-	  					"mergedFrom"       : null
+			var tile = {"x"     : tileArray[t].x,
+						"y"     : tileArray[t].y,
+						"value" : tileArray[t].value,
+	  					"prevX" : tileArray[t].prevX,
+	  					"prevY" : tileArray[t].prevY,
+	  					"merged": tileArray[t].merged
 					   };
 
 			addTile(tile);
@@ -170,10 +171,16 @@ function applyClasses(element, classes) {
 function addTile(tile){
   var wrapper   = document.createElement("div");
   var inner     = document.createElement("div");
-  var position  = tile.previousPosition || { x: tile.x, y: tile.y };
+  
+var position = {x:0,y:0};
+if (tile.prevX || tile.prevY) {
+	position.x = tile.prevX;
+	position.y = tile.prevY;
+}else{
+	position.x = tile.x;
+	position.y = tile.y;
+}
   var positionClass = positionClassF(position);
-
-
   var classes = ["tile", "tile-" + tile.value, positionClass];
 
   if (tile.value > 2048) classes.push("tile-super");
@@ -183,20 +190,22 @@ function addTile(tile){
   inner.classList.add("tile-inner");
   inner.textContent = tile.value;
 
-  if (tile.previousPosition) {
+  if (tile.prevX || tile.prevY) {
     // Make sure that the tile gets rendered in the previous position first
     window.requestAnimationFrame(function () {
-      classes[2] = self.positionClass({ x: tile.x, y: tile.y });
-      self.applyClasses(wrapper, classes); // Update the position
+      classes[2] = positionClassF({ x: tile.x, y: tile.y });
+      applyClasses(wrapper, classes); // Update the position
     });
-  } else if (tile.mergedFrom) {
-    classes.push("tile-merged");
-    this.applyClasses(wrapper, classes);
+  } else if (tile.merged) {
 
-    // Render the tiles that merged
+    classes.push("tile-merged");
+    /*
+    applyClasses(wrapper, classes);
     tile.mergedFrom.forEach(function (merged) {
       self.addTile(merged);
     });
+	*/
+
   } else {
     classes.push("tile-new");
     applyClasses(wrapper, classes);
