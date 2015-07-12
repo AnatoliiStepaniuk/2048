@@ -36,13 +36,8 @@ public class Path {
                 return false;
     }
     private void move(int index){
-        tiles[index].setX(tiles[index].getX()+Direction.dX);
-        tiles[index].setY(tiles[index].getY() + Direction.dY);
-//        tiles[index-1] = new Tile(tiles[index]);
         //copy info into neighbour tile
         tiles[index-1].setValue(tiles[index].getValue());
-        tiles[index-1].setX(tiles[index].getX());
-        tiles[index-1].setY(tiles[index].getY());
         tiles[index-1].setPrevX(tiles[index].getPrevX());
         tiles[index-1].setPrevY(tiles[index].getPrevY());
         tiles[index-1].setMerged(tiles[index].getMerged());
@@ -59,19 +54,9 @@ public class Path {
             else return false;
     }
     private void merge(int index){
-        tiles[index].setX(tiles[index].getX()+Direction.dX);
-        tiles[index].setY(tiles[index].getY() + Direction.dY);
-
-//        tiles[index-1] = new Tile(tiles[index]);
         //copy info into neighbour tile
-        tiles[index-1].setValue(tiles[index].getValue());
-        tiles[index-1].setX(tiles[index].getX());
-        tiles[index-1].setY(tiles[index].getY());
         tiles[index-1].setPrevX(tiles[index].getPrevX());
         tiles[index-1].setPrevY(tiles[index].getPrevY());
-        tiles[index-1].setMerged(tiles[index].getMerged());
-
-
         tiles[index - 1].setValue(tiles[index-1].getValue()*2); // double value
         tiles[index-1].setMerged(true); // will not merge anymore during this turn
         tiles[index].setValue(0);

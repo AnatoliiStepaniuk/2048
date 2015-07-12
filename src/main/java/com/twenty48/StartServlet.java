@@ -80,9 +80,14 @@ public class StartServlet extends HttpServlet  {
             if(j != lines.length-1)
                 sb.append(",");
         }
+        sb.append("]}");
 
+        out.println(sb.toString());
+        out.close();
+    }
 
-        out.println(answer);
+}
+
 /*
 {
   "tiles":[
@@ -134,11 +139,4 @@ public class StartServlet extends HttpServlet  {
   ]
 }
 
-
-
 */
-
-        out.close();
-    }
-
-}

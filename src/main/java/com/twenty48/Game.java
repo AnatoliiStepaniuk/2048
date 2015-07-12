@@ -11,15 +11,13 @@ public class Game {
     }
 
 
-/*
     public static void main(String[] args) {
         Game game = new Game(GameState.Game);
         System.out.println(game.run(2));
         System.out.println(game.run(1));
-        System.out.println(game.run(1));
-        System.out.println(game.run(1));
+        System.out.println(game.run(4));
+        System.out.println(game.run(3));
     }
-*/
 
 
     public String run(int code){
@@ -76,6 +74,7 @@ public class Game {
         }
 
         gameState = getGameState();
+
         return playField.getTiles();
     }
 

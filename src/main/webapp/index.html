@@ -136,21 +136,20 @@ jQuery(document).on('keydown',function(event){
 
 
 function parseAnswer(str){
-var answer = JSON.parse(str);
-var board_mass = answer.board;
+	var answer = JSON.parse(str);
+	var tileArray = answer.tiles;
 
-for(var y=0; y<board_mass.length; y++){
-	for(var x=0; x<board_mass.length; x++){
-			var tile = {"x":x,
-						"y":y,
-						"value":board_mass[y][x],
+	for(var t=0; t<tileArray.length; t++){
+
+			var tile = {"x":tileArray[t].x,
+						"y":tileArray[t].y,
+						"value":tileArray[t].value,
 	  					"previousPosition" : null,
 	  					"mergedFrom"       : null
 					   };
 
 			addTile(tile);
 	}
-}
 }
 
 

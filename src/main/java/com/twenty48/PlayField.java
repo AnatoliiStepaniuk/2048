@@ -1,5 +1,6 @@
 package com.twenty48;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class PlayField {
@@ -20,7 +21,7 @@ public class PlayField {
                 currentField[j][i] = new Tile(j, i, 0);
         }
 
-//        spawn();
+        spawn();
         spawn();
     }
 
@@ -37,8 +38,8 @@ public class PlayField {
             }
         } while(wasActionInLoop);
 
-//        if(wasActionInTurn)
-//            spawn();
+        if(wasActionInTurn)
+            spawn();
     }
 
     private void saveOldPositions(){
@@ -51,8 +52,6 @@ public class PlayField {
                 }
             }
         }
-
-
     }
 
     public void spawn(){
@@ -66,13 +65,20 @@ public class PlayField {
         } while(currentField[y][x].getValue() != 0);
 
         //put 2 or 4 there
-
-//        value = (r.nextInt(10) == 0 ? 4 : 2);
+        value = (r.nextInt(10) == 0 ? 4 : 2);
 //        currentField[y][x] = new Tile(y, x, value);
-            currentField[0][0] = new Tile(0, 0, 16);
-            currentField[1][0] = new Tile(1, 0, 8);
-            currentField[2][0] = new Tile(2, 0, 4);
-            currentField[3][0] = new Tile(3, 0, 4);
+
+        currentField[y][x].setValue(value);
+        currentField[y][x].setX(x);
+        currentField[y][x].setY(y);
+        currentField[y][x].setPrevX(x);
+        currentField[y][x].setPrevY(y);
+        currentField[y][x].setMerged(false);
+
+//            currentField[0][0] = new Tile(0, 0, 16);
+//            currentField[1][0] = new Tile(1, 0, 8);
+//            currentField[2][0] = new Tile(2, 0, 4);
+//            currentField[3][0] = new Tile(3, 0, 4);
 
 
     }
@@ -112,24 +118,27 @@ public class PlayField {
 
     public String getTiles(){
         StringBuilder sb = new StringBuilder();
+        ArrayList<Tile> tmpList = new ArrayList<>();
+        for(int j = 0; j < PlayField.getSize(); j++)
+            for(int i = 0; i < PlayField.getSize(); i++)
+                if(currentField[j][i].getValue() != 0)
+                    tmpList.add(currentField[j][i]);
 
-        for(int j = 0; j < PlayField.getSize(); j++){
-            for(int i = 0; i < PlayField.getSize(); i++){
-                if(currentField[j][i].getValue() != 0) {
-                    sb.append(currentField[j][i].getValue());
-                    sb.append(" ");
-                    sb.append(currentField[j][i].getX());
-                    sb.append(" ");
-                    sb.append(currentField[j][i].getY());
-                    sb.append(" ");
-                    sb.append(currentField[j][i].getPrevX());
-                    sb.append(" ");
-                    sb.append(currentField[j][i].getY());
-                    sb.append(" ");
-                    sb.append(currentField[j][i].getMerged());
-                    sb.append("\n");
-                }
-            }
+        for(int i = 0; i < tmpList.size(); i++) {
+            sb.append(tmpList.get(i).getValue());
+            sb.append(" ");
+            sb.append(tmpList.get(i).getX());
+            sb.append(" ");
+            sb.append(tmpList.get(i).getY());
+            sb.append(" ");
+            sb.append(tmpList.get(i).getPrevX());
+            sb.append(" ");
+
+            sb.append(tmpList.get(i).getPrevY());
+            sb.append(" ");
+            sb.append(tmpList.get(i).getMerged());
+            if(i != tmpList.size())
+                sb.append("\n");
         }
 
         return sb.toString();
