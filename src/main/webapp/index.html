@@ -128,9 +128,9 @@ function parseAnswer(str){
 	for(var t=0; t<tileArray.length; t++){
 
 			var tile = {
+						"value" : tileArray[t].value,
 						"x"     : tileArray[t].x,
 						"y"     : tileArray[t].y,
-						"value" : tileArray[t].value,
 	  					"prevX" : tileArray[t].prevX,
 	  					"prevY" : tileArray[t].prevY,
 	  					"merged": tileArray[t].merged
