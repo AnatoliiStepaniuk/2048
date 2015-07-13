@@ -10,11 +10,8 @@
 
  </head>
  <body>
-Нажмите на клавиатуре стрелочки вверх, вправо, вниз, влево
-<br>
-Esc - для новой игры
 
-<h1 id="mes" style="font-size: 50px; text-align: center;"></h1>
+ <!--<h1 id="mes" style="font-size: 50px; text-align: center;"></h1>-->
 
 <div class="container">
 	<div class="heading">
@@ -27,7 +24,7 @@ Esc - для новой игры
 
 	<div class="above-game">
 		<p class="game-intro">Join the numbers and get to the <strong>2048 tile!</strong></p>
-		<a class="restart-button">New Game</a>
+		<a class="restart-button" onclick="runGame(0)">New Game</a>
 	</div>
 
 	<div class="game-container">
@@ -99,7 +96,8 @@ Esc - для новой игры
 <script type="text/javascript">
 jQuery(document).on('keydown',function(event){
 
-	
+	if(event.keyCode == 38 || event.keyCode == 40)
+		event.preventDefault();
 	var direction = -1;
 	if(event.keyCode == 27){
 		direction = 0;
@@ -118,19 +116,7 @@ jQuery(document).on('keydown',function(event){
 	}
 
 	if(direction >= 0 && direction <= 4){
-		$.ajax({
-		  method  : "POST",
-		  url     : "/2048/start",
-		  data    : {
-			direction: direction
-		  },
-		  success : function(answer){
-		  	  	<!--jQuery("#mes").html(answer);-->
-		  	var tileContainer    = document.querySelector(".tile-container");
-			tileContainer.innerHTML = "";
-			parseAnswer(answer);
-		  }
-		});
+		runGame(direction);
 	}
 });
 
@@ -141,7 +127,8 @@ function parseAnswer(str){
 
 	for(var t=0; t<tileArray.length; t++){
 
-			var tile = {"x"     : tileArray[t].x,
+			var tile = {
+						"x"     : tileArray[t].x,
 						"y"     : tileArray[t].y,
 						"value" : tileArray[t].value,
 	  					"prevX" : tileArray[t].prevX,
@@ -221,8 +208,9 @@ if (tile.prevX || tile.prevY) {
 
 
 
-$(document).ready( function(event){
-  var direction = 0;
+$(document).ready(runGame(0));
+
+function runGame(direction){
 	$.ajax({
 	  method  : "POST",
 	  url     : "/2048/start",
@@ -231,11 +219,13 @@ $(document).ready( function(event){
 	  },
 	  success : function(answer){
 	  	<!--jQuery("#mes").html(answer);-->
+	  	var tileContainer = document.querySelector(".tile-container");
+		tileContainer.innerHTML = "";
 	  	parseAnswer(answer);
 	  }
 
 	});
-});
+}
 
 </script>
  </body> 
