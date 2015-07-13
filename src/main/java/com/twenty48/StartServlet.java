@@ -64,7 +64,9 @@ public class StartServlet extends HttpServlet  {
         out.println(sb.toString());
 */
 
-        sb.append("{\"tiles\":[");
+        sb.append("{\"currentScore\":" + Score.getCurrentScore() + ",");
+        sb.append("\"bestScore\":" + Score.getBestScore() + ",");
+        sb.append("\"tiles\":[");
         for(int j = 0; j < lines.length; j++){
             String [] tileObject = lines[j].split(" ");
             sb.append("{");

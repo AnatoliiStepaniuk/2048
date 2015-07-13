@@ -122,15 +122,18 @@ jQuery(document).on('keydown',function(event){
 
 
 function parseAnswer(str){
+
 	var answer = JSON.parse(str);
-	var tileArray = answer.tiles;
+	var tileArray 		= answer.tiles;
+	var currentScore 	= answer.currentScore;
+	var bestScore 		= answer.bestScore;
 
 	for(var t=0; t<tileArray.length; t++){
 
 			var tile = {
-						"value" : tileArray[t].value,
 						"x"     : tileArray[t].x,
 						"y"     : tileArray[t].y,
+						"value" : tileArray[t].value,
 	  					"prevX" : tileArray[t].prevX,
 	  					"prevY" : tileArray[t].prevY,
 	  					"merged": tileArray[t].merged
@@ -138,6 +141,7 @@ function parseAnswer(str){
 
 			addTile(tile);
 	}
+
 }
 
 
