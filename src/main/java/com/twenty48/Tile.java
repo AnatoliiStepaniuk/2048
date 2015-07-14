@@ -9,6 +9,8 @@ public class Tile {
         this.value = value;
         this.y = y;
         this.x = x;
+        this.prevX = this.x;
+        this.prevY = this.y;
         merged = false;
     }
 

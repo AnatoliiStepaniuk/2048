@@ -162,9 +162,9 @@ function applyClasses(element, classes) {
 function addTile(tile){
   var wrapper   = document.createElement("div");
   var inner     = document.createElement("div");
-  
+
 var position = {x:0,y:0};
-if (tile.prevX || tile.prevY) {
+if (tile.prevX !== -1 || tile.prevY !== -1) {
 	position.x = tile.prevX;
 	position.y = tile.prevY;
 }else{
@@ -181,7 +181,11 @@ if (tile.prevX || tile.prevY) {
   inner.classList.add("tile-inner");
   inner.textContent = tile.value;
 
-  if (tile.prevX || tile.prevY) {
+  if (tile.prevX === -1 || tile.prevY === -1) {
+      classes.push("tile-new");
+      applyClasses(wrapper, classes);
+  }
+    if (tile.prevX !== -1 || tile.prevY !== -1) {
     // Make sure that the tile gets rendered in the previous position first
     window.requestAnimationFrame(function () {
       classes[2] = positionClassF({ x: tile.x, y: tile.y });
@@ -198,8 +202,7 @@ if (tile.prevX || tile.prevY) {
 	*/
 
   } else {
-    classes.push("tile-new");
-    applyClasses(wrapper, classes);
+
   }
 
   // Add the inner part of the tile to the wrapper
