@@ -9,6 +9,8 @@ public class Tile {
         this.value = value;
         this.y = y;
         this.x = x;
+        this.prevX = x;
+        this.prevY = y;
         merged = false;
     }
 
@@ -41,16 +43,8 @@ public class Tile {
         return x;
     }
 
-    public void setX(int x) {
-        this.x = x;
-    }
-
     public int getY() {
         return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
     }
 
     public int getPrevX() {
