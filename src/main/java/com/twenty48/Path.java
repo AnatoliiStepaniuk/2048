@@ -43,6 +43,8 @@ public class Path {
         tiles[index-1].setMerged(tiles[index].getMerged());
 
         tiles[index].setValue(0);
+        tiles[index].setPrevX(-1);
+        tiles[index].setPrevY(-1);
     }
     private boolean canMerge(int index){
         if(tiles[index].getValue() == 0)
@@ -60,6 +62,8 @@ public class Path {
         tiles[index - 1].setValue(tiles[index-1].getValue()*2); // double value
         tiles[index-1].setMerged(true); // will not merge anymore during this turn
         tiles[index].setValue(0);
+        tiles[index].setPrevX(-1);
+        tiles[index].setPrevY(-1);
         Score.setScore(Score.getCurrentScore()+tiles[index-1].getValue()); // write down the score for merging
     }
 
