@@ -5,7 +5,9 @@ public class Tile {
     private int x, y, prevX, prevY;
     private boolean merged;
 
-    public Tile(int x, int y, int value) {
+    public Tile(int y, int x, int value) {
+        this.value = value;
+        this.y = y;
         this.x = x;
         this.y = y;
         this.value = value;

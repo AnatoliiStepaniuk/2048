@@ -149,6 +149,7 @@ function parseAnswer(JSONString) {
 
 }
 
+
 function positionClassF(position) {
   position = normalizePosition(position);
   return "tile-position-" + position.x + "-" + position.y;
@@ -168,7 +169,7 @@ function addTile(tile){
   var inner     = document.createElement("div");
   
 var position = {x:0,y:0};
-if (tile.prevX !== -1 || tile.prevY !== -1) {
+if (tile.prevX || tile.prevY) {
 	position.x = tile.prevX;
 	position.y = tile.prevY;
 }else{
@@ -185,11 +186,7 @@ if (tile.prevX !== -1 || tile.prevY !== -1) {
   inner.classList.add("tile-inner");
   inner.textContent = tile.value;
 
-  if (tile.prevX === -1 || tile.prevY === -1) {
-      classes.push("tile-new");
-     applyClasses(wrapper, classes);
-  }
-    if (tile.prevX !== -1 || tile.prevY !== -1) {
+  if (tile.prevX || tile.prevY) {
     // Make sure that the tile gets rendered in the previous position first
     window.requestAnimationFrame(function () {
       classes[2] = positionClassF({ x: tile.x, y: tile.y });
@@ -205,6 +202,9 @@ if (tile.prevX !== -1 || tile.prevY !== -1) {
     });
 	*/
 
+  } else {
+    classes.push("tile-new");
+    applyClasses(wrapper, classes);
   }
 
   // Add the inner part of the tile to the wrapper
@@ -217,7 +217,7 @@ if (tile.prevX !== -1 || tile.prevY !== -1) {
 
 
 
-$(document).ready(runGame("NewGame"));
+$(document).ready(runGame(0));
 
 function runGame(direction){
 	$.ajax({
@@ -227,6 +227,7 @@ function runGame(direction){
 	  	direction: direction
 	  },
 	  success : function(answer){
+	  	<!--jQuery("#mes").html(answer);-->
 	  	var tileContainer = document.querySelector(".tile-container");
 		tileContainer.innerHTML = "";
 	  	parseAnswer(answer);
