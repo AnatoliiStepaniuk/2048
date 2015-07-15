@@ -11,7 +11,6 @@
  </head>
  <body>
 
- <!--<h1 id="mes" style="font-size: 50px; text-align: center;"></h1>-->
 
 <div class="container">
 	<div class="heading">
@@ -24,7 +23,7 @@
 
 	<div class="above-game">
 		<p class="game-intro">Join the numbers and get to the <strong>2048 tile!</strong></p>
-		<a class="restart-button" onclick="runGame(0)">New Game</a>
+		<a class="restart-button" onclick="runGame('NewGame')">New Game</a>
 	</div>
 
 	<div class="game-container">
@@ -98,35 +97,41 @@ jQuery(document).on('keydown',function(event){
 
 	if(event.keyCode == 38 || event.keyCode == 40)
 		event.preventDefault();
-	var direction = -1;
+	var direction;
 	if(event.keyCode == 27){
-		direction = 0;
+		direction = "NewGame";
+		<!--direction = 0;-->
 	}
 	else if(event.keyCode == 38){
-		direction = 1;
+		direction = "UP";
+		<!--direction = 1;-->
 	}
 	else if(event.keyCode == 39){
-		direction = 2;
+		direction = "RIGHT";
+		<!--direction = 2;-->
 	}
 	else if(event.keyCode == 40){
-		direction = 3;
+		direction = "DOWN";
+		<!--direction = 3;-->
 	}
 	else if(event.keyCode == 37){
-		direction = 4;
+		direction = "LEFT";
+		<!--direction = 4;-->
 	}
 
-	if(direction >= 0 && direction <= 4){
+	if(direction == "UP" || direction == "RIGHT" || direction == "DOWN" || direction == "LEFT" || direction == "NewGame") {
+	<!--if(direction >= 0 && direction <= 4){-->
 		runGame(direction);
 	}
 });
 
 
-function parseAnswer(str){
+function parseAnswer(JSONString) {
 
-	var answer = JSON.parse(str);
-	var tileArray 		= answer.tiles;
-	var currentScore 	= answer.currentScore;
-	var bestScore 		= answer.bestScore;
+	var answerObject = JSON.parse(JSONString);
+	var tileArray 		= answerObject.tiles;
+	var currentScore 	= answerObject.currentScore;
+	var bestScore 		= answerObject.bestScore;
 
 	for(var t=0; t<tileArray.length; t++){
 
@@ -143,7 +148,6 @@ function parseAnswer(str){
 	}
 
 }
-
 
 function positionClassF(position) {
   position = normalizePosition(position);
@@ -213,7 +217,7 @@ if (tile.prevX !== -1 || tile.prevY !== -1) {
 
 
 
-$(document).ready(runGame(0));
+$(document).ready(runGame("NewGame"));
 
 function runGame(direction){
 	$.ajax({
@@ -223,7 +227,6 @@ function runGame(direction){
 	  	direction: direction
 	  },
 	  success : function(answer){
-	  	<!--jQuery("#mes").html(answer);-->
 	  	var tileContainer = document.querySelector(".tile-container");
 		tileContainer.innerHTML = "";
 	  	parseAnswer(answer);

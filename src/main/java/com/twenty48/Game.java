@@ -10,50 +10,13 @@ public class Game {
         playField = new PlayField();
     }
 
-/*    public static void main(String[] args) {
-        Game game = new Game(GameState.Game);
-        System.out.println(game.run(2));
-        System.out.println(game.run(1));
-        System.out.println(game.run(1));
-        System.out.println(game.run(1));
-    }*/
+    public String run(String direction){
 
-
-    public String run(int code){
-
-        Direction.direction = "NO";
-        Direction.dX = 0;
-        Direction.dY = 0;
-        switch (code){
-            case 0:
-                return playField.getTiles();
-            case 1:
-                Direction.direction = "UP";
-                Direction.dX = 0;
-                Direction.dY = -1;
-                break;
-            case 2:
-                Direction.direction = "RIGHT";
-                Direction.dX = 1;
-                Direction.dY = 0;
-                break;
-            case 3:
-                Direction.direction = "DOWN";
-                Direction.dX = 0;
-                Direction.dY = 1;
-                break;
-            case 4:
-                Direction.direction = "LEFT";
-                Direction.dX = -1;
-                Direction.dY = 0;
-                break;
-            default:
-                ///
-                break;
-              // если код 0 - новая игра, то что?
-        }
-
+        setDirection(direction);
         switch (gameState){
+            case NewGame:
+                gameState = GameState.Game;
+                return playField.getTiles();
             case Game:
                 playField.oneTurn();
                 break;
@@ -63,13 +26,6 @@ public class Game {
             case Twenty48:
                 ///
                 break;
-            case SuperGame:
-                ///
-                break;
-            default:
-                ///
-                break;
-
         }
 
         gameState = getGameState();
@@ -77,17 +33,45 @@ public class Game {
         return playField.getTiles();
     }
 
+    private void setDirection(String direction) {
+
+        switch (direction) {
+            case "NewGame":
+                gameState = GameState.NewGame;
+                break;
+            case "UP":
+                Direction.direction = "UP";
+                Direction.dX = 0;
+                Direction.dY = -1;
+                break;
+            case "RIGHT":
+                Direction.direction = "RIGHT";
+                Direction.dX = 1;
+                Direction.dY = 0;
+                break;
+            case "DOWN":
+                Direction.direction = "DOWN";
+                Direction.dX = 0;
+                Direction.dY = 1;
+                break;
+            case "LEFT":
+                Direction.direction = "LEFT";
+                Direction.dX = -1;
+                Direction.dY = 0;
+                break;
+            default:
+                break;
+        }
+    }
+
     private GameState getGameState(){
 
         if (!playField.actionIsPossible())
             return GameState.GameOver;
-/*
         else
            if (playField.getMaxValue() == 2048)
              return GameState.Twenty48;
-*/
-            else
+           else
                return GameState.Game;
-
     }
 }

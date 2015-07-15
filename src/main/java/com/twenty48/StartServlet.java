@@ -32,9 +32,10 @@ public class StartServlet extends HttpServlet  {
     }
 
     public void go(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int direction =  Integer.parseInt(request.getParameter("direction"));
+        String direction =  request.getParameter("direction");
+//        int direction =  Integer.parseInt(request.getParameter("direction"));
 
-        if(direction == 0)
+        if(direction.equals("NewGame"))
             game = new Game(GameState.Game); // start new game
         String answer = game.run(direction);
 

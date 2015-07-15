@@ -9,6 +9,8 @@ public class PlayField {
     private Tile[][] currentField;
     private boolean wasActionInLoop;
     private boolean wasActionInTurn;
+    private static final int X_COORDINATE = 0;
+    private static final int Y_COORDINATE = 1;
 
     public PlayField(){
         currentField = new Tile[size][size];
@@ -80,8 +82,8 @@ public class PlayField {
         // put 2 or 4 into on the random position in arrayList
         int position = r.nextInt(freeTilesPositions.size());
         value = (r.nextInt(10) == 0 ? 4 : 2);
-        int x = freeTilesPositions.get(position)[0];
-        int y = freeTilesPositions.get(position)[1];
+        int x = freeTilesPositions.get(position)[X_COORDINATE];
+        int y = freeTilesPositions.get(position)[Y_COORDINATE];
         currentField[y][x] = new Tile(x, y, value);
     }
 
@@ -103,17 +105,17 @@ public class PlayField {
         return false;
     }
 
-/*
-    public int getMaxValue(){
+    public int getMaxValue() {
         int max = 0;
-        for (Tile[] row : currentField){
-            for(Tile t : row)
-                if(t.getValue() > max)
-                    max = t.getValue();
+        for (int y = 0; y < size; y++){
+            for(int x = 0; x < size; x++) {
+                if (currentField[y][x] != null && currentField[y][x].getValue() > max)
+                    max = currentField[y][x].getValue();
+            }
         }
+
         return max;
     }
-*/
 
     public String getTiles() {
         StringBuilder sb = new StringBuilder();
@@ -134,7 +136,7 @@ public class PlayField {
             sb.append(" ");
             sb.append(tmpList.get(i).getPrevY());
             sb.append(" ");
-            sb.append(tmpList.get(i).getMerged());
+            sb.append(tmpList.get(i).isMerged());
             if(i != tmpList.size())
                 sb.append("\n");
         }
@@ -177,7 +179,7 @@ public class PlayField {
             if(x+Direction.dX >= 0 && x+Direction.dX < size && y+Direction.dY >= 0 && y+Direction.dY < size
                 && currentField[y+Direction.dY][x+Direction.dX] != null
                 && currentField[y+Direction.dY][x+Direction.dX].getValue() == currentField[y][x].getValue()
-                && !currentField[y+Direction.dY][x+Direction.dX].getMerged() && !currentField[y][x].getMerged()) {
+                && !currentField[y+Direction.dY][x+Direction.dX].isMerged() && !currentField[y][x].isMerged()) {
             return true;
         }
         else return false;

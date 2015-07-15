@@ -22,7 +22,7 @@ public class Tile {
         this.value = value;
     }
 
-    public boolean getMerged(){
+    public boolean isMerged(){
         return merged;
     }
 
