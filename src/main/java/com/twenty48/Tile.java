@@ -5,22 +5,13 @@ public class Tile {
     private int x, y, prevX, prevY;
     private boolean merged;
 
-    public Tile(int y, int x, int value) {
-        this.value = value;
-        this.y = y;
+    public Tile(int x, int y, int value) {
         this.x = x;
-        this.prevX = x;
-        this.prevY = y;
+        this.y = y;
+        this.value = value;
+        this.prevX = -1;
+        this.prevY = -1;
         merged = false;
-    }
-
-    public Tile(Tile tile) {
-        this.value = tile.value;
-        this.x = tile.y;
-        this.y = tile.y;
-        this.prevX = tile.prevX;
-        this.prevY = tile.prevY;
-        this.merged = tile.merged;
     }
 
     public int getValue(){
@@ -39,10 +30,17 @@ public class Tile {
         this.merged = merged;
     }
 
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
     public int getX() {
         return x;
     }
-
     public int getY() {
         return y;
     }
