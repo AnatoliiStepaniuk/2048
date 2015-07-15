@@ -16,7 +16,7 @@ public class Tile {
 
     public Tile(Tile tile) {
         this.value = tile.value;
-        this.x = tile.y;
+        this.x = tile.x;
         this.y = tile.y;
         this.prevX = tile.prevX;
         this.prevY = tile.prevY;

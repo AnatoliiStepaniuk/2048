@@ -92,7 +92,6 @@
 <script src="js/game_manager.js"></script>
 <script src="js/application.js"></script>-->
 
-
 <script type="text/javascript">
 jQuery(document).on('keydown',function(event){
 
@@ -158,6 +157,21 @@ function applyClasses(element, classes) {
   element.setAttribute("class", classes.join(" "));
 };
 
+window.requestAnimationFrame = function (callback) {
+    var lastTime = 0;
+    var currTime = new Date().getTime();
+    var timeToCall = Math.max(0, 60 - (currTime - lastTime));
+    var id = window.setTimeout(function () {
+                callback(currTime + timeToCall);
+            },
+            timeToCall);
+    lastTime = currTime + timeToCall;
+    return id;
+};
+
+window.cancelAnimationFrame = function (id) {
+    clearTimeout(id);
+};
 
 function addTile(tile){
   var wrapper   = document.createElement("div");
@@ -181,28 +195,27 @@ if (tile.prevX !== -1 || tile.prevY !== -1) {
   inner.classList.add("tile-inner");
   inner.textContent = tile.value;
 
-  if (tile.prevX === -1 || tile.prevY === -1) {
-      classes.push("tile-new");
-      applyClasses(wrapper, classes);
-  }
-    if (tile.prevX !== -1 || tile.prevY !== -1) {
+  if (tile.prevX !== -1 || tile.prevY !== -1) {
     // Make sure that the tile gets rendered in the previous position first
+
     window.requestAnimationFrame(function () {
-      classes[2] = positionClassF({ x: tile.x, y: tile.y });
-      applyClasses(wrapper, classes); // Update the position
+        classes[2] = positionClassF({ x: tile.x, y: tile.y });
+
+        applyClasses(wrapper, classes);
     });
-  } else if (tile.merged) {
+//    if (tile.merged) {
+//          window.requestAnimationFrame(function () {
+//
+//              applyClasses(wrapper, classes);
+//          });
+//    }
 
-    classes.push("tile-merged");
-    /*
-    applyClasses(wrapper, classes);
-    tile.mergedFrom.forEach(function (merged) {
-      self.addTile(merged);
-    });
-	*/
 
-  } else {
+  }
 
+  else {
+    classes.push("tile-new");
+      applyClasses(wrapper, classes);
   }
 
   // Add the inner part of the tile to the wrapper
