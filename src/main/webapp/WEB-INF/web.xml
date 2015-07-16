@@ -32,6 +32,11 @@
         </init-param>
     </servlet>
 
+    <servlet>
+        <servlet-name>ScoreServlet</servlet-name>
+        <servlet-class>com.twenty48.Servlets.ScoreServlet</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>MoveTilesServlet</servlet-name>
         <url-pattern>/servlet/MoveTiles</url-pattern>
@@ -45,6 +50,11 @@
     <servlet-mapping>
         <servlet-name>GetTilesServlet</servlet-name>
         <url-pattern>/servlet/GetTiles</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ScoreServlet</servlet-name>
+        <url-pattern>/servlet/Score</url-pattern>
     </servlet-mapping>
 
 

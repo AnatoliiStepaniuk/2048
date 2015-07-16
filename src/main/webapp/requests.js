@@ -28,6 +28,16 @@ function getTiles() {
 	});
 }
 
+function getScore() {
+	$.ajax({
+		method  : "POST",
+		url     : "servlet/Score",
+		success : function(score){
+			updateScore(score);
+		}
+	});
+}
+
 
 function parseTiles(JSONtiles) {
 

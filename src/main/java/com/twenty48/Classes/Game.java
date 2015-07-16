@@ -8,6 +8,7 @@ public class Game {
     public Game(GameState gameState){
         this.gameState = gameState;
         playField = new PlayField();
+        Score.setScore(0);
     }
 
     public void moveTiles(String direction) {

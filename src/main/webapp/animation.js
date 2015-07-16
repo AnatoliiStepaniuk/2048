@@ -29,6 +29,7 @@ jQuery(document).on('keydown',function(event){
 	if(direction == "UP" || direction == "RIGHT" || direction == "DOWN" || direction == "LEFT" || direction == "NewGame") {
 		moveTiles(direction);
 		getTiles();
+        getScore();
 	}
 });
 
@@ -112,3 +113,7 @@ if (tile.prevX !== -1 || tile.prevY !== -1) {
   tileContainer.appendChild(wrapper);
 };
 
+function updateScore(score){
+  $(".score-container").text(score);
+  console.log(score);
+}
