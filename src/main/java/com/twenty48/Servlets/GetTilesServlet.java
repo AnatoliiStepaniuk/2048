@@ -24,7 +24,7 @@ public class GetTilesServlet extends HttpServlet  {
         Game currentGame = (Game)session.getAttribute("game");
 
         if(currentGame == null){
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/newgame");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("servlet/NewGame");
             dispatcher.forward(request, response);
         }
         else {

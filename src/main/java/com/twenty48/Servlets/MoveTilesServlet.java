@@ -24,7 +24,7 @@ public class MoveTilesServlet extends HttpServlet  {
 
 
         if(currentGame == null) {
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/newgame");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("servlet/NewGame");
             dispatcher.forward(request, response);
         }
         else {
