@@ -35,7 +35,7 @@ public class Game {
 
     private void setDirection(String direction) {
 
-        switch (direction) {
+        switch (direction) { // refactor! someFunc(String, int, int)
             case "NewGame":
                 gameState = GameState.NewGame;
                 break;

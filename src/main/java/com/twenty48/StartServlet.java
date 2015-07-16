@@ -43,27 +43,6 @@ public class StartServlet extends HttpServlet  {
         PrintWriter out = response.getWriter();
         String[] lines = answer.split("\n");
         StringBuilder sb = new StringBuilder();
-/*
-
-        sb.append("{\"board\":[");
-            for(int j = 0; j < lines.length; j++){
-            String[] temp = lines[j].split(" ");
-            sb.append("[");
-            for(int i = 0; i < temp.length; i++){
-                sb.append(temp[i]);
-                if(i != temp.length-1)
-                    sb.append(",");
-            }
-            sb.append("]");
-            if(j != lines.length-1)
-                sb.append(",");
-        }
-
-        sb.append("]");
-        sb.append("}");
-
-        out.println(sb.toString());
-*/
 
         sb.append("{\"currentScore\":" + Score.getCurrentScore() + ",");
         sb.append("\"bestScore\":" + Score.getBestScore() + ",");
