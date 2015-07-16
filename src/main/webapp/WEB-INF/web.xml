@@ -6,8 +6,26 @@
 
 
     <servlet>
-        <servlet-name>StartServlet</servlet-name>
-        <servlet-class>com.twenty48.StartServlet</servlet-class>
+        <servlet-name>MoveTilesServlet</servlet-name>
+        <servlet-class>com.twenty48.Servlets.MoveTilesServlet</servlet-class>
+        <init-param>
+            <param-name>technology</param-name>
+            <param-value>servlets</param-value>
+        </init-param>
+    </servlet>
+
+    <servlet>
+        <servlet-name>NewGameServlet</servlet-name>
+        <servlet-class>com.twenty48.Servlets.NewGameServlet</servlet-class>
+        <init-param>
+            <param-name>technology</param-name>
+            <param-value>servlets</param-value>
+        </init-param>
+    </servlet>
+
+    <servlet>
+        <servlet-name>GetTilesServlet</servlet-name>
+        <servlet-class>com.twenty48.Servlets.GetTilesServlet</servlet-class>
         <init-param>
             <param-name>technology</param-name>
             <param-value>servlets</param-value>
@@ -15,8 +33,18 @@
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>StartServlet</servlet-name>
-        <url-pattern>/start</url-pattern>
+        <servlet-name>MoveTilesServlet</servlet-name>
+        <url-pattern>/servlet/MoveTiles</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>NewGameServlet</servlet-name>
+        <url-pattern>/servlet/NewGame</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>GetTilesServlet</servlet-name>
+        <url-pattern>/servlet/GetTiles</url-pattern>
     </servlet-mapping>
 
 

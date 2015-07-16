@@ -1,4 +1,4 @@
-package com.twenty48;
+package com.twenty48.Classes;
 
 public class Game {
 
@@ -10,15 +10,12 @@ public class Game {
         playField = new PlayField();
     }
 
-    public String run(String direction){
+    public void moveTiles(String direction) {
 
         setDirection(direction);
         switch (gameState){
-            case NewGame:
-                gameState = GameState.Game;
-                return playField.getTiles();
             case Game:
-                playField.oneTurn();
+                playField.moveTiles();
                 break;
             case GameOver:
                 ///
@@ -29,35 +26,22 @@ public class Game {
         }
 
         gameState = getGameState();
-
-        return playField.getTiles();
     }
 
     private void setDirection(String direction) {
 
-        switch (direction) { // refactor! someFunc(String, int, int)
-            case "NewGame":
-                gameState = GameState.NewGame;
-                break;
+        switch (direction) {
             case "UP":
-                Direction.direction = "UP";
-                Direction.dX = 0;
-                Direction.dY = -1;
+                Direction.setDirection("UP", 0, -1);
                 break;
             case "RIGHT":
-                Direction.direction = "RIGHT";
-                Direction.dX = 1;
-                Direction.dY = 0;
+                Direction.setDirection("RIGHT", 1, 0);
                 break;
             case "DOWN":
-                Direction.direction = "DOWN";
-                Direction.dX = 0;
-                Direction.dY = 1;
+                Direction.setDirection("DOWN", 0, 1);
                 break;
             case "LEFT":
-                Direction.direction = "LEFT";
-                Direction.dX = -1;
-                Direction.dY = 0;
+                Direction.setDirection("LEFT", -1, 0);
                 break;
             default:
                 break;
@@ -73,5 +57,9 @@ public class Game {
              return GameState.Twenty48;
            else
                return GameState.Game;
+    }
+
+    public String getTiles() {
+        return playField.getTiles();
     }
 }

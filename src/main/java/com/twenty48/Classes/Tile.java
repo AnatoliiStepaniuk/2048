@@ -1,4 +1,4 @@
-package com.twenty48;
+package com.twenty48.Classes;
 
 public class Tile {
     private int value;
@@ -45,16 +45,8 @@ public class Tile {
         return y;
     }
 
-    public int getPrevX() {
-        return prevX;
-    }
-
     public void setPrevX(int prevX) {
         this.prevX = prevX;
-    }
-
-    public int getPrevY() {
-        return prevY;
     }
 
     public void setPrevY(int prevY) {

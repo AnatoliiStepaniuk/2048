@@ -11,6 +11,7 @@
  </head>
  <body>
 
+ <h1 id="mes" style="font-size: 50px; text-align: center;"></h1>
 
 <div class="container">
 	<div class="heading">
@@ -23,7 +24,7 @@
 
 	<div class="above-game">
 		<p class="game-intro">Join the numbers and get to the <strong>2048 tile!</strong></p>
-		<a class="restart-button" onclick="runGame('NewGame')">New Game</a>
+		<a class="restart-button" onclick="newGame();getTiles();">New Game</a>
 	</div>
 
 	<div class="game-container">
@@ -80,6 +81,7 @@
 	</p>
 </div>
 
+<script src="requests.js"></script>
 <script src="animation.js"></script>
 
  </body>

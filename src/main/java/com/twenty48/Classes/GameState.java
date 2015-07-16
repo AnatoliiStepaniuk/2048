@@ -1,8 +1,7 @@
-package com.twenty48;
+package com.twenty48.Classes;
 
 public enum GameState {
     Game,
-    NewGame,
     GameOver,
     Twenty48
 }

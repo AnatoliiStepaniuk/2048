@@ -1,58 +1,36 @@
+//$(document).ready(newGame());
+$(document).ready(function(){
+  newGame();
+  getTiles();
+});
+
 jQuery(document).on('keydown',function(event){
 
 	if(event.keyCode == 38 || event.keyCode == 40)
 		event.preventDefault();
 	var direction;
-	if(event.keyCode == 27){
-		direction = "NewGame";
-		<!--direction = 0;-->
-	}
-	else if(event.keyCode == 38){
+//	if(event.keyCode == 27){
+//		direction = "NewGame";
+//	}
+//	else
+	if(event.keyCode == 38){
 		direction = "UP";
-		<!--direction = 1;-->
 	}
 	else if(event.keyCode == 39){
 		direction = "RIGHT";
-		<!--direction = 2;-->
 	}
 	else if(event.keyCode == 40){
 		direction = "DOWN";
-		<!--direction = 3;-->
 	}
 	else if(event.keyCode == 37){
 		direction = "LEFT";
-		<!--direction = 4;-->
 	}
-
+      // refactor! delete if statement
 	if(direction == "UP" || direction == "RIGHT" || direction == "DOWN" || direction == "LEFT" || direction == "NewGame") {
-	<!--if(direction >= 0 && direction <= 4){-->
-		runGame(direction);
+		moveTiles(direction);
+		getTiles();
 	}
 });
-
-
-function parseAnswer(JSONString) {
-
-	var answerObject = JSON.parse(JSONString);
-	var tileArray 		= answerObject.tiles;
-	var currentScore 	= answerObject.currentScore;
-	var bestScore 		= answerObject.bestScore;
-
-	for(var t=0; t<tileArray.length; t++){
-
-			var tile = {
-						"x"     : tileArray[t].x,
-						"y"     : tileArray[t].y,
-						"value" : tileArray[t].value,
-	  					"prevX" : tileArray[t].prevX,
-	  					"prevY" : tileArray[t].prevY,
-	  					"merged": tileArray[t].merged
-					   };
-
-			addTile(tile);
-	}
-
-}
 
 function positionClassF(position) {
   position = normalizePosition(position);
@@ -68,7 +46,7 @@ function applyClasses(element, classes) {
 };
 
 
-function addTile(tile){
+function addTile(tile) {
   var wrapper   = document.createElement("div");
   var inner     = document.createElement("div");
 
@@ -119,23 +97,3 @@ if (tile.prevX !== -1 || tile.prevY !== -1) {
   tileContainer.appendChild(wrapper);
 };
 
-
-
-
-$(document).ready(runGame("NewGame"));
-
-function runGame(direction){
-	$.ajax({
-	  method  : "POST",
-	  url     : "/2048/start",
-	  data    : {
-	  	direction: direction
-	  },
-	  success : function(answer){
-	  	var tileContainer = document.querySelector(".tile-container");
-		tileContainer.innerHTML = "";
-	  	parseAnswer(answer);
-	  }
-
-	});
-}

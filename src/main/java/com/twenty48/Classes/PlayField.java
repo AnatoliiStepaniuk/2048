@@ -1,7 +1,8 @@
-package com.twenty48;
+package com.twenty48.Classes;
 
 import java.util.ArrayList;
 import java.util.Random;
+import com.google.gson.Gson;
 
 public class PlayField {
 
@@ -19,7 +20,7 @@ public class PlayField {
         spawn();
     }
 
-    public void oneTurn() {
+    public void moveTiles() {
         saveOldPositions();
         wasActionInTurn = false; // presumption
 
@@ -118,30 +119,15 @@ public class PlayField {
     }
 
     public String getTiles() {
-        StringBuilder sb = new StringBuilder();
         ArrayList<Tile> tmpList = new ArrayList<>();
         for(int y = 0; y < size; y++)
             for(int x = 0; x < size; x++)
                 if(currentField[y][x] != null)
                     tmpList.add(currentField[y][x]);
 
-        for(int i = 0; i < tmpList.size(); i++) {
-            sb.append(tmpList.get(i).getValue());
-            sb.append(" ");
-            sb.append(tmpList.get(i).getX());
-            sb.append(" ");
-            sb.append(tmpList.get(i).getY());
-            sb.append(" ");
-            sb.append(tmpList.get(i).getPrevX());
-            sb.append(" ");
-            sb.append(tmpList.get(i).getPrevY());
-            sb.append(" ");
-            sb.append(tmpList.get(i).isMerged());
-            if(i != tmpList.size())
-                sb.append("\n");
-        }
-
-        return sb.toString();
+            Gson gson = new Gson();
+            String JSONanswer = gson.toJson(tmpList);
+            return JSONanswer;
     }
 
 

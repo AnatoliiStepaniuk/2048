@@ -1,4 +1,4 @@
-package com.twenty48;
+package com.twenty48.Classes;
 
 public class Score {
     private static int currentScore = 0;
