@@ -8,7 +8,6 @@ public class Game {
     public Game(GameState gameState){
         this.gameState = gameState;
         playField = new PlayField();
-        Score.setScore(0);
     }
 
     public void moveTiles(String direction) {
@@ -62,5 +61,17 @@ public class Game {
 
     public String getTiles() {
         return playField.getTiles();
+    }
+
+    public String getScore(){
+
+        return playField.getScore();
+
+//        Gson gson = new Gson();
+//        String JSONscore = gson.toJson(score);
+//
+//        return JSONscore;
+
+
     }
 }

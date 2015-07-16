@@ -16,7 +16,6 @@ function newGame() {
 }
 
 function getTiles() {
-        // IS IT RIGHT TO USE AJAX, IF WE USE NO XML ?
 	$.ajax({
 	  method  : "POST",
 	  url     : "servlet/GetTiles",
@@ -33,15 +32,13 @@ function getScore() {
 		method  : "POST",
 		url     : "servlet/Score",
 		success : function(score){
-			updateScore(score);
+			parseScore(score);
 		}
 	});
 }
 
 
 function parseTiles(JSONtiles) {
-
-//jQuery("#mes").html(JSONtiles);
 
 	var tileArray = JSON.parse(JSONtiles);
 
@@ -51,12 +48,21 @@ function parseTiles(JSONtiles) {
 
 }
 
+function parseScore(JSONscore) {
+
+	var scoreObject = JSON.parse(JSONscore);
+	var currentScore = scoreObject.currentScore;
+	var bestScore = scoreObject.bestScore;
+	updateScore(currentScore, bestScore);
+}
+
 function cleanTilesContainer() {
 	var tileContainer = document.querySelector(".tile-container");
 	tileContainer.innerHTML = "";
 }
 
-function updateScore(score) {
-  $(".score-container").text(score);
+function updateScore(currentScore, bestScore) {
+  $(".score-container").text(currentScore);
+  $(".best-container").text(currentScore);
 }
 

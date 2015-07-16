@@ -1,18 +1,18 @@
 package com.twenty48.Classes;
 
 public class Score {
-    private static int currentScore = 0;
-    private static int bestScore = 0;
+    private int currentScore;
+    private int bestScore;
 
-    public static int getCurrentScore() {
+    public int getCurrentScore() {
         return currentScore;
     }
 
-    public static int getBestScore() {
+    public int getBestScore() {
         return bestScore;
     }
 
-    public static void setScore(int score) {
+    public void setScore(int score) {
         currentScore = score;
         if(currentScore > bestScore)
             bestScore = currentScore;

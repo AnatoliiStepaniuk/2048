@@ -12,10 +12,11 @@ public class PlayField {
     private boolean wasActionInTurn;
     private static final int X_COORDINATE = 0;
     private static final int Y_COORDINATE = 1;
+    private Score score;
 
     public PlayField(){
         currentField = new Tile[size][size];
-
+        score = new Score();
         spawn();
         spawn();
     }
@@ -126,10 +127,15 @@ public class PlayField {
                     tmpList.add(currentField[y][x]);
 
             Gson gson = new Gson();
-            String JSONanswer = gson.toJson(tmpList);
-            return JSONanswer;
+            String JSONtiles = gson.toJson(tmpList);
+            return JSONtiles;
     }
 
+    public String getScore() {
+        Gson gson = new Gson();
+        String JSONscore = gson.toJson(score);
+        return JSONscore;
+    }
 
     public boolean moveOrMerge(int x, int y) {
         boolean wasAction = false;
@@ -182,9 +188,8 @@ public class PlayField {
         currentField[y+Direction.dY][x+Direction.dX].setValue(currentField[y][x].getValue()*2);
         currentField[y+Direction.dY][x+Direction.dX].setMerged(true);
         currentField[y][x] = null;
-        Score.setScore(Score.getCurrentScore()+currentField[y+Direction.dY][x+Direction.dX].getValue()); // write down the score for merging
+        score.setScore(score.getCurrentScore()+currentField[y+Direction.dY][x+Direction.dX].getValue()); // write down the score for merging
 
     }
-
 
 }

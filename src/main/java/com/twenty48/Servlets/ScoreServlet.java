@@ -24,15 +24,14 @@ public class ScoreServlet extends HttpServlet {
         session.setMaxInactiveInterval(30*60); // inactive lifetime of session object (in seconds)
         Game currentGame = (Game)session.getAttribute("game");
 
-        if(currentGame == null){
+        if(currentGame == null) {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("servlet/NewGame");
             dispatcher.forward(request, response);
         }
         else {
-            int currentScore = Score.getCurrentScore();
-            String JSONtiles = currentGame.getTiles();
+            String JSONscore = currentGame.getScore();
             PrintWriter out = response.getWriter();
-            out.println(currentScore);
+            out.println(JSONscore);
             out.close();
         }
     }

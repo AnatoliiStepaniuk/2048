@@ -5,6 +5,7 @@ $(document).ready(function(){
 });
 
 jQuery(document).on('keydown',function(event){
+        // get status
 
 	if(event.keyCode == 38 || event.keyCode == 40)
 		event.preventDefault();
@@ -30,6 +31,7 @@ jQuery(document).on('keydown',function(event){
 		moveTiles(direction);
 		getTiles();
         getScore();
+
 	}
 });
 
