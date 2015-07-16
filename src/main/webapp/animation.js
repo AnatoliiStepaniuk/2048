@@ -32,6 +32,21 @@ jQuery(document).on('keydown',function(event){
 	}
 });
 
+window.requestAnimationFrame = function (callback) {
+  var lastTime = 0;
+  var currTime = new Date().getTime();
+  var timeToCall = Math.max(0, 60 - (currTime - lastTime));
+  var id = window.setTimeout(function () {
+        callback(currTime + timeToCall);
+      },
+      timeToCall);
+  lastTime = currTime + timeToCall;
+  return id;
+};
+window.cancelAnimationFrame = function (id) {
+  clearTimeout(id);
+};
+
 function positionClassF(position) {
   position = normalizePosition(position);
   return "tile-position-" + position.x + "-" + position.y;
