@@ -56,3 +56,7 @@ function cleanTilesContainer() {
 	tileContainer.innerHTML = "";
 }
 
+function updateScore(score) {
+  $(".score-container").text(score);
+}
+

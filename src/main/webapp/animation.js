@@ -113,7 +113,3 @@ if (tile.prevX !== -1 || tile.prevY !== -1) {
   tileContainer.appendChild(wrapper);
 };
 
-function updateScore(score){
-  $(".score-container").text(score);
-  console.log(score);
-}
