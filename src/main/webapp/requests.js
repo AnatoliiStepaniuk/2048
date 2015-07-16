@@ -1,7 +1,7 @@
 function moveTiles(direction) {
 	$.ajax({
 	  method  : "POST",
-	  url     : "/2048/servlet/MoveTiles",
+	  url     : "servlet/MoveTiles",
 	  data    : {
 	  	direction: direction
 	  }
@@ -11,7 +11,7 @@ function moveTiles(direction) {
 function newGame() {
 	$.ajax({
 	  method  : "POST",
-	  url     : "/2048/servlet/NewGame"
+	  url     : "servlet/NewGame"
 	});
 }
 
@@ -19,7 +19,7 @@ function getTiles() {
         // IS IT RIGHT TO USE AJAX, IF WE USE NO XML ?
 	$.ajax({
 	  method  : "POST",
-	  url     : "/2048/servlet/GetTiles",
+	  url     : "servlet/GetTiles",
 	  data    : {	  },
 	  success : function(JSONtiles){
 		cleanTilesContainer();
