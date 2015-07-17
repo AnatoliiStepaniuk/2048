@@ -1,19 +1,16 @@
-//$(document).ready(newGame());
 $(document).ready(function(){
   newGame();
   getTiles();
+  getScore();
 });
 
 jQuery(document).on('keydown',function(event){
         // get status
 
+        // to avoid scrolling:
 	if(event.keyCode == 38 || event.keyCode == 40)
 		event.preventDefault();
 	var direction;
-//	if(event.keyCode == 27){
-//		direction = "NewGame";
-//	}
-//	else
 	if(event.keyCode == 38){
 		direction = "UP";
 	}
@@ -26,12 +23,11 @@ jQuery(document).on('keydown',function(event){
 	else if(event.keyCode == 37){
 		direction = "LEFT";
 	}
-      // refactor! delete if statement
-	if(direction == "UP" || direction == "RIGHT" || direction == "DOWN" || direction == "LEFT" || direction == "NewGame") {
+
+	if(direction == "UP" || direction == "RIGHT" || direction == "DOWN" || direction == "LEFT") {
 		moveTiles(direction);
 		getTiles();
         getScore();
-
 	}
 });
 

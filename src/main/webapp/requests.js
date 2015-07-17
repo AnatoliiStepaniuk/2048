@@ -30,7 +30,7 @@ function getTiles() {
 function getScore() {
 	$.ajax({
 		method  : "POST",
-		url     : "servlet/Score",
+		url     : "servlet/GetScore",
 		success : function(score){
 			parseScore(score);
 		}
@@ -63,6 +63,6 @@ function cleanTilesContainer() {
 
 function updateScore(currentScore, bestScore) {
   $(".score-container").text(currentScore);
-  $(".best-container").text(currentScore);
+  $(".best-container").text(bestScore);
 }
 

@@ -7,11 +7,7 @@ public class Score {
     public int getCurrentScore() {
         return currentScore;
     }
-
-    public int getBestScore() {
-        return bestScore;
-    }
-
+    public void setCurrentScore(int score) {currentScore = score;}
     public void setScore(int score) {
         currentScore = score;
         if(currentScore > bestScore)

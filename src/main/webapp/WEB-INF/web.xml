@@ -34,7 +34,7 @@
 
     <servlet>
         <servlet-name>ScoreServlet</servlet-name>
-        <servlet-class>com.twenty48.Servlets.ScoreServlet</servlet-class>
+        <servlet-class>com.twenty48.Servlets.GetScoreServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -54,7 +54,7 @@
 
     <servlet-mapping>
         <servlet-name>ScoreServlet</servlet-name>
-        <url-pattern>/servlet/Score</url-pattern>
+        <url-pattern>/servlet/GetScore</url-pattern>
     </servlet-mapping>
 
 

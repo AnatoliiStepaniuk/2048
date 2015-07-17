@@ -2,6 +2,7 @@ package com.twenty48.Servlets;
 
 import com.twenty48.Classes.Game;
 import com.twenty48.Classes.GameState;
+import com.twenty48.Classes.Score;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,10 +20,13 @@ public class NewGameServlet extends HttpServlet  {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session = request.getSession(true); // if there's no session object, the one will be created
-        session.setMaxInactiveInterval(30*60); // inactive lifetime of session object (in seconds)
+        session.setMaxInactiveInterval(30*60*60); // inactive lifetime of session object (in seconds)
 
         // no matter whether we re-write or create new attribute "game" - it should contain new game
         session.setAttribute("game", new Game(GameState.Game));
+
+        Score score = (Score)session.getAttribute("score");
+        score.setCurrentScore(0);
     }
 
 }

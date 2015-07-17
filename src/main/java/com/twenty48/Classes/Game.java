@@ -63,15 +63,7 @@ public class Game {
         return playField.getTiles();
     }
 
-    public String getScore(){
-
-        return playField.getScore();
-
-//        Gson gson = new Gson();
-//        String JSONscore = gson.toJson(score);
-//
-//        return JSONscore;
-
-
+    public int getScoreIncrease() {
+        return playField.getScoreIncrease();
     }
 }

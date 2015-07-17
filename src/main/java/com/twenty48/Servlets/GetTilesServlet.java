@@ -20,7 +20,7 @@ public class GetTilesServlet extends HttpServlet  {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session = request.getSession(true); // if there's no session object, the one will be created
-        session.setMaxInactiveInterval(30*60); // inactive lifetime of session object (in seconds)
+        session.setMaxInactiveInterval(30*60*60); // inactive lifetime of session object (in seconds)
         Game currentGame = (Game)session.getAttribute("game");
 
         if(currentGame == null){
