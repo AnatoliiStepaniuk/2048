@@ -1,4 +1,4 @@
-var gameState;
+var gameState = "Game";
 $(document).ready(function(){
   newGame();
   getTiles();
@@ -10,7 +10,15 @@ jQuery(document).on('keydown',function(event){
   getGameState();
   if (gameState.trim() == "GameOver") {
       $(".game-message").show();
+      $(".game-message p").text("Game over");
       return;
+    } else if (gameState.trim() == "Twenty48") {
+      $(".game-message").show();
+      $(".game-message p").text("You win");
+      return;
+    } else {
+      $(".game-message").hide();
+      $(".game-message p").text = "";
     }
     // to avoid scrolling:
 	if(event.keyCode == 38 || event.keyCode == 40)

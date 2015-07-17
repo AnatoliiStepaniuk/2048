@@ -9,6 +9,7 @@ function moveTiles(direction) {
 }
 
 function newGame() {
+	$(".game-message").hide();
 	$.ajax({
 	  method  : "POST",
 	  url     : "servlet/NewGame"
