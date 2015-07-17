@@ -37,6 +37,11 @@
         <servlet-class>com.twenty48.Servlets.GetScoreServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>GetStateServlet</servlet-name>
+        <servlet-class>com.twenty48.Servlets.GetStateServlet</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>MoveTilesServlet</servlet-name>
         <url-pattern>/servlet/MoveTiles</url-pattern>
@@ -55,6 +60,11 @@
     <servlet-mapping>
         <servlet-name>ScoreServlet</servlet-name>
         <url-pattern>/servlet/GetScore</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>GetStateServlet</servlet-name>
+        <url-pattern>/servlet/GetState</url-pattern>
     </servlet-mapping>
 
 

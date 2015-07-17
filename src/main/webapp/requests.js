@@ -37,9 +37,18 @@ function getScore() {
 	});
 }
 
+function getGameState() {
+	$.ajax({
+		method  : "POST",
+		url     : "servlet/GetState",
+		success : function(state){
+			updateGameState(state);
+		}
+	});
+}
+
 
 function parseTiles(JSONtiles) {
-
 	var tileArray = JSON.parse(JSONtiles);
 
 	for(var i=0; i<tileArray.length; i++){

@@ -48,7 +48,7 @@ public class Game {
         }
     }
 
-    private GameState getGameState(){
+    public GameState getGameState(){
 
         if (!playField.actionIsPossible())
             return GameState.GameOver;

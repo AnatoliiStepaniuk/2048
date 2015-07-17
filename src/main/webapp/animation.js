@@ -1,3 +1,4 @@
+var gameState;
 $(document).ready(function(){
   newGame();
   getTiles();
@@ -5,9 +6,13 @@ $(document).ready(function(){
 });
 
 jQuery(document).on('keydown',function(event){
-        // get status
-
-        // to avoid scrolling:
+    // get status
+  getGameState();
+  if (gameState.trim() == "GameOver") {
+      $(".game-message").show();
+      return;
+    }
+    // to avoid scrolling:
 	if(event.keyCode == 38 || event.keyCode == 40)
 		event.preventDefault();
 	var direction;
@@ -110,4 +115,8 @@ if (tile.prevX !== -1 || tile.prevY !== -1) {
   var tileContainer = document.querySelector(".tile-container");
   tileContainer.appendChild(wrapper);
 };
+
+function updateGameState(state) {
+  gameState = state;
+}
 
