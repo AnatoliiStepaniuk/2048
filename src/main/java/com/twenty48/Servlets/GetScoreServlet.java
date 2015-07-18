@@ -31,7 +31,7 @@ public class GetScoreServlet extends HttpServlet {
             session.setAttribute("score", new Score());
         }
         if(currentGame == null) {
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("servlet/NewGame");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/servlet/NewGame");
             dispatcher.forward(request, response);
         }
         else {

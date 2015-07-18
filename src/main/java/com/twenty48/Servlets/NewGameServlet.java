@@ -26,7 +26,8 @@ public class NewGameServlet extends HttpServlet  {
         session.setAttribute("game", new Game(GameState.Game));
 
         Score score = (Score)session.getAttribute("score");
-        score.setCurrentScore(0);
+        if(score != null)
+           score.setCurrentScore(0);
     }
 
 }
