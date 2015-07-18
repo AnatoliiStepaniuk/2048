@@ -8,8 +8,6 @@ public class PlayField {
 
     private static int size = 4;
     private Tile[][] currentField;
-    private boolean wasActionInLoop;
-    private boolean wasActionInTurn;
     private static final int X_COORDINATE = 0;
     private static final int Y_COORDINATE = 1;
     private Gson gson;
@@ -27,8 +25,9 @@ public class PlayField {
     public void moveTiles() {
         scoreIncrease = 0;
         saveOldPositions();
-        wasActionInTurn = false; // presumption
+        boolean wasActionInTurn = false;
 
+        boolean wasActionInLoop;
         do { // move or merge tiles while there's still some action
             wasActionInLoop = false; // presumption
 
@@ -130,8 +129,7 @@ public class PlayField {
                 if(currentField[y][x] != null)
                     tmpList.add(currentField[y][x]);
 
-            String JSONtiles = gson.toJson(tmpList);
-            return JSONtiles;
+        return gson.toJson(tmpList);
     }
 
     public int getScoreIncrease() {
@@ -159,23 +157,17 @@ public class PlayField {
         if (currentField[y][x] == null)
             return false;
         else
-        if (x+Direction.dX >= 0 && x+Direction.dX < size && y+Direction.dY >= 0 && y+Direction.dY < size && currentField[y+Direction.dY][x+Direction.dX] == null)
-            return true;
-        else
-            return false;
+            return x + Direction.dX >= 0 && x + Direction.dX < size && y + Direction.dY >= 0 && y + Direction.dY < size && currentField[y + Direction.dY][x + Direction.dX] == null;
     }
 
     private boolean canMerge(int x, int y) {
         if(currentField[y][x] == null)
             return false;
         else
-            if(x+Direction.dX >= 0 && x+Direction.dX < size && y+Direction.dY >= 0 && y+Direction.dY < size
-                && currentField[y+Direction.dY][x+Direction.dX] != null
-                && currentField[y+Direction.dY][x+Direction.dX].getValue() == currentField[y][x].getValue()
-                && !currentField[y+Direction.dY][x+Direction.dX].isMerged() && !currentField[y][x].isMerged()) {
-            return true;
-        }
-        else return false;
+            return x + Direction.dX >= 0 && x + Direction.dX < size && y + Direction.dY >= 0 && y + Direction.dY < size
+                    && currentField[y + Direction.dY][x + Direction.dX] != null
+                    && currentField[y + Direction.dY][x + Direction.dX].getValue() == currentField[y][x].getValue()
+                    && !currentField[y + Direction.dY][x + Direction.dX].isMerged() && !currentField[y][x].isMerged();
     }
 
     private void move(int x, int y) {
