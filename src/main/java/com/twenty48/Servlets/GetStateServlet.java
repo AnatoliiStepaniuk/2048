@@ -1,7 +1,7 @@
 package com.twenty48.Servlets;
 
 import com.twenty48.Classes.Game;
-import com.twenty48.Classes.Score;
+import com.twenty48.Classes.GameState;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class ScoreServlet extends HttpServlet {
+public class GetStateServlet extends HttpServlet{
     public static final long serialVersionID = 1L;
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
@@ -21,18 +21,18 @@ public class ScoreServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session = request.getSession(true); // if there's no session object, the one will be created
-        session.setMaxInactiveInterval(30*60); // inactive lifetime of session object (in seconds)
+        session.setMaxInactiveInterval(30*60*60); // inactive lifetime of session object (in seconds)
         Game currentGame = (Game)session.getAttribute("game");
 
         if(currentGame == null){
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/newgame");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/servlet/NewGame");
             dispatcher.forward(request, response);
-            return;
         }
-
-        PrintWriter out = response.getWriter();
-        out.println(Score.getCurrentScore());
-        out.close();
-
+        else {
+            GameState gameState = currentGame.getGameState();
+            PrintWriter out = response.getWriter();
+            out.println(gameState.toString());
+            out.close();
+        }
     }
 }
