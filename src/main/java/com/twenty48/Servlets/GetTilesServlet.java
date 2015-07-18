@@ -22,11 +22,6 @@ public class GetTilesServlet extends HttpServlet  {
         HttpSession session = request.getSession(true); // if there's no session object, the one will be created
         session.setMaxInactiveInterval(30*60*60); // inactive lifetime of session object (in seconds)
         Game currentGame = (Game)session.getAttribute("game");
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         if(currentGame == null){
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/servlet/NewGame");
             dispatcher.forward(request, response);
